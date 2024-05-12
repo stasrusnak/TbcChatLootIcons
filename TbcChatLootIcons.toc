@@ -4,6 +4,7 @@
 ## SavedVariables: TbcChatLootIconsSavedVariables
 ## DefaultState: enabled
 ## Version: 0.1
-## Notes: Отображает иконки предметов в чате   
+## Notes: Отображает иконки предметов в чате. Настроить можно через иконку у миникарты или через команду 
+в чат /looticons
 
 TbcChatLootIcons.lua
