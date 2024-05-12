@@ -1,5 +1,28 @@
 local ICON_SIZE = 40
 
+
+local frame = CreateFrame("Frame")
+frame:RegisterEvent("ADDON_LOADED")  
+function frame:OnEvent(event, addonName)
+    if event == "ADDON_LOADED" and addonName == "TbcChatLootIcons" then
+        -- Загрузка сохраненных настроек
+        if TbcChatLootIconsSavedVariables then
+            if TbcChatLootIconsSavedVariables.ICON_SIZE then
+                ICON_SIZE = TbcChatLootIconsSavedVariables.ICON_SIZE 
+            end
+        else
+            print("Файл сохраненных настроек не найден или поврежден.")
+        end 
+end 
+frame:SetScript("OnEvent", frame.OnEvent)
+
+-- Прочие части вашего кода
+-- ...
+
+
+
+
+
 local function SimpleRound(val, valStep)
     return floor(val / valStep) * valStep
 end
@@ -16,8 +39,8 @@ local function CreateIconSizeSlider(parent, name, title, minVal, maxVal, valStep
     slider.textHigh = _G[name .. "High"]
     slider.textLow:SetText(floor(minVal))
     slider.textHigh:SetText(floor(maxVal))
-    slider.textLow:SetTextColor(0.4, 0.4, 0.4)
-    slider.textHigh:SetTextColor(0.4, 0.4, 0.4)
+    -- slider.textLow:SetTextColor(0.4, 0.4, 0.4)
+    -- slider.textHigh:SetTextColor(0.4, 0.4, 0.4)
     
     editbox:SetSize(50, 30)
     editbox:ClearAllPoints()
@@ -108,7 +131,7 @@ SaveButton:SetScript("OnClick", function()
     print("Настройки сохранены!")
 end)
  
-
+ 
 -- Отображение меню настроек аддона
 local function ShowOptionsFrame()
     OptionsFrame:Show()
@@ -117,3 +140,5 @@ end
 -- Регистрация команды для отображения меню настроек
 SLASH_MYADDON1 = "/tbclooticons"
 SlashCmdList["MYADDON"] = ShowOptionsFrame
+
+
